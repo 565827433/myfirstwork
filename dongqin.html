@@ -71,91 +71,7 @@
         background-color: #fff;
     }
 </style>
-<script>
-    window.onload=function(){
-        var container=document.getElementById('container');
-        var list=document.getElementById('list');
-        var buttons=document.getElementById('buttons').getElementsByTagName('span');
-        var prev=document.getElementById('prev');
-        var next=document.getElementById('next');
-        var index=1;
-        var animated=false;
-        var timer;
 
-        function showButton(){
-            for( var i = 0;i < buttons.length;i++){
-                if(buttons[i].className=='on'){ buttons[i].className='';
-                break;
-                }
-            }buttons[index - 1].className = 'on';
-        }
-        function animate(offset){
-            animated=true;
-            var newleft = parseInt(list.style.left) + offset;
-            var time=450;  //位移时间
-            var interval = 30;//位移间隔时间
-            var speed = offset/(time/interval);//每次位移量
-            function go() {
-                if((speed<0 && parseInt(list.style.left)>newleft)||(speed>0 && parseInt(list.style.left)<newleft)){
-                    list.style.left = parseInt(list.style.left) + speed +'px';
-                    setTimeout(go,interval);
-                     }else { animated=false;
-                         list.style.left = newleft+'px';
-                    if (newleft > -1200) {
-                        list.style.left = -12000 + 'px';
-                    }
-                    if (newleft < -12000) {
-                        list.style.left = -1200 + 'px';
-                    }
-                }
-            }
-            go();
-        }
-        function play() {
-            timer = setInterval(function(){
-                next.onclick();
-            },3000);
-        }
-        function stop() {
-            clearInterval(timer);
-        }
-        next.onclick=function(){
-            if (index == 10) {
-                index = 1;
-            } else {index += 1}
-            showButton();
-            if(animated==false){
-                animate(-1200);
-            }
-
-        }
-        prev.onclick=function(){
-            if (index == 1) {
-                index = 10;
-            } else {index -= 1}
-            showButton();
-            if(animated==false){
-                animate(1200);
-            }
-        }
-        for(var i=0;i<buttons.length;i++){
-            buttons[i].onclick = function(){
-
-                var myindex = parseInt(this.getAttribute('index'));
-                if(myindex==index){return;}
-                var offset = -1200*(myindex-index);
-                if(animated==false){
-                    animate(offset);
-                }
-                animate(offset);
-                index=myindex;
-                showButton();
-            }
-        }
-        container.onmouseover = stop;
-        container.onmouseout = play;
-    }
-</script>
 <body>
 <div class="header">
     <div class="top">
@@ -291,5 +207,90 @@
         <a href="#"><img src="images/17.png" alt="">冀公网安备 13030202000995号</a>
     </div>
 </div>
+    <script>
+    window.onload=function(){
+        var container=document.getElementById('container');
+        var list=document.getElementById('list');
+        var buttons=document.getElementById('buttons').getElementsByTagName('span');
+        var prev=document.getElementById('prev');
+        var next=document.getElementById('next');
+        var index=1;
+        var animated=false;
+        var timer;
+
+        function showButton(){
+            for( var i = 0;i < buttons.length;i++){
+                if(buttons[i].className=='on'){ buttons[i].className='';
+                break;
+                }
+            }buttons[index - 1].className = 'on';
+        }
+        function animate(offset){
+            animated=true;
+            var newleft = parseInt(list.style.left) + offset;
+            var time=450;  //位移时间
+            var interval = 30;//位移间隔时间
+            var speed = offset/(time/interval);//每次位移量
+            function go() {
+                if((speed<0 && parseInt(list.style.left)>newleft)||(speed>0 && parseInt(list.style.left)<newleft)){
+                    list.style.left = parseInt(list.style.left) + speed +'px';
+                    setTimeout(go,interval);
+                     }else { animated=false;
+                         list.style.left = newleft+'px';
+                    if (newleft > -1200) {
+                        list.style.left = -12000 + 'px';
+                    }
+                    if (newleft < -12000) {
+                        list.style.left = -1200 + 'px';
+                    }
+                }
+            }
+            go();
+        }
+        function play() {
+            timer = setInterval(function(){
+                next.onclick();
+            },3000);
+        }
+        function stop() {
+            clearInterval(timer);
+        }
+        next.onclick=function(){
+            if (index == 10) {
+                index = 1;
+            } else {index += 1}
+            showButton();
+            if(animated==false){
+                animate(-1200);
+            }
+
+        }
+        prev.onclick=function(){
+            if (index == 1) {
+                index = 10;
+            } else {index -= 1}
+            showButton();
+            if(animated==false){
+                animate(1200);
+            }
+        }
+        for(var i=0;i<buttons.length;i++){
+            buttons[i].onclick = function(){
+
+                var myindex = parseInt(this.getAttribute('index'));
+                if(myindex==index){return;}
+                var offset = -1200*(myindex-index);
+                if(animated==false){
+                    animate(offset);
+                }
+                animate(offset);
+                index=myindex;
+                showButton();
+            }
+        }
+        container.onmouseover = stop;
+        container.onmouseout = play;
+    }
+</script>
 </body>
 </html>
