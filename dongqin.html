@@ -111,6 +111,14 @@
             }
             go();
         }
+        function play() {
+            timer = setInterval(function(){
+                next.onclick();
+            },3000);
+        }
+        function stop() {
+            clearInterval(timer);
+        }
         next.onclick=function(){
             if (index == 10) {
                 index = 1;
@@ -144,6 +152,8 @@
                 showButton();
             }
         }
+        container.onmouseover = stop;
+        container.onmouseout = play;
     }
 </script>
 <body>
